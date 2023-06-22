@@ -24,8 +24,8 @@ int main(){
     int n;
     cout<<"enter number : ";
     cin>>t.n;
-    int res=t.fact(n);
-    cout<<"factorial of "<<n<<" is "<<res;
+    int res=t.fact(t.n);
+    cout<<"factorial of "<<t.n<<" is "<<res;
 
 
 }
