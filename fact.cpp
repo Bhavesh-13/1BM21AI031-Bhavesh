@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-class fibo{
+class factorial{
 
 public:
     int n;
@@ -20,9 +20,9 @@ public:
 
 
 int main(){
-    fibo t;
+    factorial t;
     int n;
-    cout<<"enter number : ";
+    cout<<"Enter a number : ";
     cin>>t.n;
     int res=t.fact(t.n);
     cout<<"factorial of "<<t.n<<" is "<<res;
