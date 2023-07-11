@@ -1,85 +1,57 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
 class sort{
-
-public : int n, arr[10];
-void merge(int * arr, int low, int mid, int high) {
-    int i, j, k;
-    int lengthLeft = mid - low + 1;
-    int lengthRight = high - mid;
-
-
-    int arrLeft[lengthLeft], arrRight[lengthRight];
-
-
-    for (int a = 0; a < lengthLeft; a++) {
-        arrLeft[a] = arr[low + a];
+    public : int n,a[40];
+    
+    void merge_sort(int a[],int l,int r){
+        if(l<r){
+        int mid=(l+r)/2;
+        merge_sort(a,l,mid);
+        merge_sort(a,mid+1,r);
+        merge(a,l,mid,r);
     }
-    for (int a = 0; a < lengthRight; a++) {
-        arrRight[a] = arr[mid + 1 + a];
-    }
-
-
-    i = 0;
-    j = 0;
-    k = low;
-
-    while (i < lengthLeft && j < lengthRight) {
-
-        if (arrLeft[i] <= arrRight[j]) {
-            arr[k] = arrLeft[i];
-            i++;
-        } else {
-            arr[k] = arrRight[j];
-            j++;
+}
+    
+    void merge(int a[],int l,int mid,int r ){
+        int i=l,j=mid+1,k=l,b[40];
+        
+        while(i<=mid && j<=r){
+            if(a[i] < a[j])
+                b[k]=a[i++];
+            else
+                b[k]=a[j++];
+            k=k+1;
         }
-        k++;
+        
+        if(i>mid){          //if 1st sub array is exhausted
+            while(j<=r){
+                b[k]=a[j++];
+                k++;
+            }
+        }
+        else{              //if 2nd sub array is exhausted
+            while(i<=mid){
+                b[k]=a[i++];
+                k++;
+            }
+        }
+        
+        for(k=l;k<=r;k++)  //to copy elements of b array to a
+         a[k]=b[k];
     }
-
-
-    while (i < lengthLeft) {
-        arr[k] = arrLeft[i];
-        k++;
-        i++;
-    }
-
-
-    while (j < lengthRight) {
-        arr[k] = arrRight[j];
-        k++;
-        j++;
-    }
-}
-
-void mergeSort(int * arr, int low, int high) {
-    int mid;
-    if (low < high) {
-
-        mid = (low + high) / 2;
-
-        mergeSort(arr, low, mid);
-        mergeSort(arr, mid + 1, high);
-
-        merge(arr, low, mid, high);
-    }
-}
 }t;
 
-void main() {
-
+int main(){
     int i;
     cout<<"\nEnter the number of elements: ";
     cin>>t.n;
-
-    cout<<"\nEnter those elements : ";
+    cout<<"\nEnter "<<t.n<<" elements: ";
     for(i=0;i<t.n;i++)
-        cin>>t.arr[i];
-    t.mergeSort(t.arr, 0, (t.n)-1);
-   cout<<"\nSorted array is :";
-for(i=0;i<t.n;i++)
-    cout<<t.arr[i]<<" ";
-
-
+     cin>>t.a[i];
+    t.merge_sort(t.a,0,t.n-1);        //pass the array , initially left index is 0 while right is n-1
+    cout<<"\nSorted array is: ";
+    for(i=0;i<t.n;i++)
+     cout<<t.a[i]<<" ";
 }
-
+            
